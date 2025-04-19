@@ -9,7 +9,7 @@ A simple and elegant app to generate, export, and store quotations — built wit
 ### 🖥️ Frontend
 
 - [x] Setup ShadCN UI
-- [x] Create quotation form
+- [] Create quotation form
 - [ ] Create calendar view for home
 - [ ] Create view for individual day listings
 - [ ] Add search view
@@ -19,7 +19,7 @@ A simple and elegant app to generate, export, and store quotations — built wit
 
 ### 🗄️ Backend
 
-- [x] Setup Sequelize
+- [] Setup Sequelize
 - [ ] Support for customizable DB (SQLite, MySQL, etc.)
 - [ ] Create models for database
 - [ ] Setup API routes
