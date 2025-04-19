@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email' }),
@@ -84,6 +85,20 @@ export default function LoginPage() {
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? 'Logging in...' : 'Login'}
               </Button>
+
+              <div className="text-sm text-center text-muted-foreground mt-2">
+                By logging in, you accept our{' '}
+                <span className="underline">terms and conditions</span>.
+              </div>
+
+              <div className="mt-4 flex justify-between text-sm">
+                <Link href="/reset-password" className="text-blue-600 hover:underline">
+                  Forgot password?
+                </Link>
+                <Link href="/register" className="text-blue-600 hover:underline">
+                  Create an account
+                </Link>
+              </div>
             </form>
           </Form>
         </CardContent>
