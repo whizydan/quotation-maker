@@ -23,9 +23,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/quotes', label: 'Quotations', icon: FileText },
-  { href: '/clients', label: 'Clients', icon: Users },
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/export', label: 'Export Data', icon: FileText },
 ]
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
