@@ -22,7 +22,7 @@ import { DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/quotations', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/export', label: 'Export Data', icon: FileText },
 ]
 
@@ -57,7 +57,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <div className="mt-auto pt-4 border-t">
           <Link href="/profile" className="flex items-center gap-3 p-2 hover:bg-muted rounded-md">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/avatar.png" alt="user" />
+              <AvatarImage src="https://user-images.githubusercontent.com/5709133/50445980-88299a80-0912-11e9-962a-6fd92fd18027.png" alt="user" />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
             <div className="text-sm">user@example.com</div>

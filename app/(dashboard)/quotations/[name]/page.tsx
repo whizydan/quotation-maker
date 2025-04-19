@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import html2pdf from "html2pdf.js"
+import { Button } from "@/components/ui/button"
 
 type QuotationItem = {
   name: string
@@ -17,6 +18,7 @@ type QuotationData = {
   companyEmail: string
   companyPhone: string
   companyWebsite: string
+  companyLogo: string
   clientName: string
   clientEmail: string
   clientPhone: string
@@ -41,6 +43,7 @@ export default function QuotationPage() {
       companyEmail: "info@mbivutech.com",
       companyPhone: "+254 712 345678",
       companyWebsite: "https://mbivutech.com",
+      companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJJ0T0pY3mW6mMgUMzRF1XSdbpQJYGZNDkoA&s",
       clientName: name,
       clientEmail: "client@example.com",
       clientPhone: "+254 701 234567",
@@ -74,28 +77,44 @@ export default function QuotationPage() {
       0
     ) ?? 0
 
-  const handleDownloadPDF = () => {
-    if (!pdfRef.current) return
-    html2pdf().set({
-      margin: 0.5,
-      filename: `quotation-${data?.quotationId}.pdf`,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    }).from(pdfRef.current).save()
-  }
+    const handleDownloadPDF = async () => {
+      if (!pdfRef.current) return
+    
+      // Ensure images are loaded
+      const images = pdfRef.current.querySelectorAll("img")
+      await Promise.all(
+        Array.from(images).map(
+          img =>
+            new Promise(resolve => {
+              if (img.complete) return resolve(true)
+              img.onload = img.onerror = () => resolve(true)
+            })
+        )
+      )
+    
+      html2pdf()
+        .set({
+          margin: 0.5,
+          filename: `quotation-${data?.quotationId}.pdf`,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        })
+        .from(pdfRef.current)
+        .save()
+    }
 
   if (!data) return <p className="p-4">Loading quotation...</p>
 
   return (
     <div className="max-w-5xl mx-auto px-4 mt-6">
       <div className="mb-4 text-right">
-        <button
+        <Button
           onClick={handleDownloadPDF}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
+          className="btn hover:cursor-pointer text-white px-4 py-2 rounded shadow"
         >
           Download PDF
-        </button>
+        </Button>
       </div>
 
       <div
@@ -104,7 +123,7 @@ export default function QuotationPage() {
       >
         <header className="text-center mb-10">
           <img
-            src="/logo.png"
+            src={data.companyLogo}
             alt="Company Logo"
             className="mx-auto h-16 mb-2"
           />
